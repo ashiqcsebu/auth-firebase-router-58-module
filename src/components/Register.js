@@ -2,11 +2,10 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../contexts/UserContext';
 
 
+
 const Register = () => {
 
-    const {createUser} = useContext(AuthContext);
-
-
+    const { createUser, signInWithGoogle } = useContext(AuthContext);
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -16,23 +15,34 @@ const Register = () => {
         const password = form.password.value;
         console.log(name, email, password);
 
-        createUser(email , password)
-        .then(result =>{
-            const user = result.user ;
-            console.log(user)
-            form.reset();
-        })
-        .catch( error =>{
-            console.error(error)
-        });
+        createUser(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                form.reset();
+            })
+            .catch(error => {
+                console.error(error)
+            });
 
     }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle().then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+
+    }
+
+
     return (
         <div>
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col ">
                     <div className="text-center lg:text-left">
-                        <h1 className="text-5xl font-bold">Please Login now!</h1>
+                        <h1 className="text-5xl font-bold">Please Register now!</h1>
                     </div>
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                         <form onSubmit={handleSubmit} className="card-body">
@@ -59,6 +69,8 @@ const Register = () => {
                                 <button className="btn btn-primary">Login</button>
                             </div>
                         </form>
+                        <button onClick={handleGoogleSignIn} className="btn btn-success">Google Sign In</button>
+
                     </div>
                 </div>
             </div>

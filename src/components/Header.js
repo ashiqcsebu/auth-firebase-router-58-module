@@ -17,7 +17,8 @@ const Header = () => {
     return (
         <div>
             <div className="navbar bg-primary text-primary-content  ">
-                <Link className='btn btn-ghost' to="/Home">Home</Link>
+                <Link className='btn btn-ghost' to="/home">Home</Link>
+                <Link className='btn btn-ghost' to="/orders">Orders</Link>
                 <Link className='btn btn-ghost' to="/login">Log In</Link>
                 <Link className='btn btn-ghost' to="/register">Register</Link>
                 {user?.email && <h1>welcome,  {user.email} </h1>}
